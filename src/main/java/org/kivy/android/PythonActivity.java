@@ -106,7 +106,8 @@ public class PythonActivity extends Activity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
         } else {
-            startService();
+            // startService();
+            Log.w("ipv8AppOnCreate","skipping startService()");
         }
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
@@ -156,7 +157,8 @@ public class PythonActivity extends Activity {
             for (int i = 0; i < permissions.length; i++) {
                 if (permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        startService();
+                        Log.w("onRequestPermissionsResult", "skipping startService()");
+                        // startService();
                     } else {
                         requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
                     }
@@ -201,7 +203,7 @@ public class PythonActivity extends Activity {
             // launchActivity(ScannerActivity.class);
         }
     }
-    
+
     // </IPV8APP>
 
 
