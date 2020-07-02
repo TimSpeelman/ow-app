@@ -86,10 +86,10 @@ dependencies {
     // annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
 
     // //DEBUG
-    compile 'com.facebook.stetho:stetho:1.4.1'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.4.1'
-    compile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    // compile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    // compile 'com.facebook.stetho:stetho:1.4.1'
+    // compile 'com.facebook.stetho:stetho-okhttp3:1.4.1'
+    // compile 'com.squareup.leakcanary:leakcanary-android:1.5'
+    //compile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
 
     // androidTestCompile 'com.android.support:support-annotations:24.2.1'
     // androidTestCompile 'com.android.support.test:runner:0.5'
