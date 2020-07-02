@@ -329,10 +329,6 @@ public class PythonActivity extends Activity {
         PythonActivity.initialize();
 
 
-        listFiles(app_root_dir);
-        listFiles(mFilesDirectory);
-        listFiles("/data/app/org.openwallet.android-1");
-
         // Load shared libraries
         String errorMsgBrokenLib = "";
         try {
@@ -373,6 +369,10 @@ public class PythonActivity extends Activity {
         String app_root_dir = getAppRoot();
         String mFilesDirectory = mActivity.getFilesDir().getAbsolutePath();
         String entry_point = getEntryPoint(app_root_dir);
+
+        listFiles(app_root_dir);
+        listFiles(mFilesDirectory);
+        listFiles("/data/app/org.openwallet.android-1");
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
         PythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
