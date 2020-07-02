@@ -18,7 +18,7 @@ public class ServiceOpenwallet extends PythonService {
     
 
     public static void start(Context ctx, String pythonServiceArgument) {
-        Log.d("ServiceOpenWallet", "start()")
+        Log.d("ServiceOpenWallet", "start()");
         String argument = ctx.getFilesDir().getAbsolutePath() + "/app";
         Intent intent = new Intent(ctx, ServiceOpenwallet.class);
         intent.putExtra("androidPrivate", argument);
@@ -35,7 +35,7 @@ public class ServiceOpenwallet extends PythonService {
     }
 
     public static void stop(Context ctx) {
-        Log.d("ServiceOpenWallet", "stop()")        
+        Log.d("ServiceOpenWallet", "stop()");      
         Intent intent = new Intent(ctx, ServiceOpenwallet.class);
         ctx.stopService(intent);
     }
@@ -54,7 +54,7 @@ public class ServiceOpenwallet extends PythonService {
      */
     public class ServiceOpenwalletBinder extends Binder {
     	ServiceOpenwallet getService() {
-            Log.d("ServiceOpenWallet", "getService()")
+            Log.d("ServiceOpenWallet", "getService()");
             // Return this instance of ServiceOpenwallet so clients can call public methods
             return ServiceOpenwallet.this;
         }
