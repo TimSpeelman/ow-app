@@ -4,6 +4,8 @@ package org.kivy.android;
 import java.net.Socket;
 import java.net.InetSocketAddress;
 
+import org.openwallet.android.R;
+
 import android.os.SystemClock;
 
 import java.io.InputStream;
@@ -142,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void ipv8AppOnCreate(Bundle savedInstanceState) {
-        setContentView(android.R.layout.activity_main);
+        setContentView(R.layout.activity_main);
 
         // Write permissions on sdcard?
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -151,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
             startService();
         }
 
-        mWebView = (WebView) findViewById(android.R.id.activity_main_webview);
+        mWebView = (WebView) findViewById(R.id.activity_main_webview);
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
