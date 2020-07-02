@@ -93,7 +93,7 @@ public class PythonService extends Service implements Runnable {
 
         Notification notification;
         Context context = getApplicationContext();
-        Intent contextIntent = new Intent(context, PythonActivity.class);
+        Intent contextIntent = new Intent(context, MainActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, contextIntent,
             PendingIntent.FLAG_UPDATE_CURRENT);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

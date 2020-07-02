@@ -295,7 +295,7 @@ public class MainActivity extends AppCompatActivity {
         //Log.v(TAG, "Ready to unpack");
         //new UnpackFilesTask().execute(getAppRoot());
 
-        PythonActivity.initialize();
+        MainActivity.initialize();
 
         // Load shared libraries
         String errorMsgBrokenLib = "";
@@ -324,7 +324,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         // if this button is clicked, close current activity
-                        PythonActivity.mActivity.finish();
+                        MainActivity.mActivity.finish();
                     }
                 });
            dlgAlert.setCancelable(false);
@@ -339,14 +339,14 @@ public class MainActivity extends AppCompatActivity {
         String entry_point = getEntryPoint(app_root_dir);
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
-        PythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
-        PythonActivity.nativeSetenv("ANDROID_ARGUMENT", app_root_dir);
-        PythonActivity.nativeSetenv("ANDROID_APP_PATH", app_root_dir);
-        PythonActivity.nativeSetenv("ANDROID_PRIVATE", mFilesDirectory);
-        PythonActivity.nativeSetenv("ANDROID_UNPACK", app_root_dir);
-        PythonActivity.nativeSetenv("PYTHONHOME", app_root_dir);
-        PythonActivity.nativeSetenv("PYTHONPATH", app_root_dir + ":" + app_root_dir + "/lib");
-        PythonActivity.nativeSetenv("PYTHONOPTIMIZE", "2");
+        MainActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
+        MainActivity.nativeSetenv("ANDROID_ARGUMENT", app_root_dir);
+        MainActivity.nativeSetenv("ANDROID_APP_PATH", app_root_dir);
+        MainActivity.nativeSetenv("ANDROID_PRIVATE", mFilesDirectory);
+        MainActivity.nativeSetenv("ANDROID_UNPACK", app_root_dir);
+        MainActivity.nativeSetenv("PYTHONHOME", app_root_dir);
+        MainActivity.nativeSetenv("PYTHONPATH", app_root_dir + ":" + app_root_dir + "/lib");
+        MainActivity.nativeSetenv("PYTHONOPTIMIZE", "2");
 
         try {
             Log.v(TAG, "Access to our meta-data...");
@@ -362,7 +362,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         final Thread pythonThread = new Thread(new PythonMain(), "PythonThread");
-        PythonActivity.mPythonThread = pythonThread;
+        MainActivity.mPythonThread = pythonThread;
         pythonThread.start();
         
         // <IPV8MAIN>   
@@ -601,11 +601,11 @@ public class MainActivity extends AppCompatActivity {
 
     public static void start_service(String serviceTitle, String serviceDescription,
                 String pythonServiceArgument) {
-        Intent serviceIntent = new Intent(PythonActivity.mActivity, PythonService.class);
-        String argument = PythonActivity.mActivity.getFilesDir().getAbsolutePath();
+        Intent serviceIntent = new Intent(MainActivity.mActivity, PythonService.class);
+        String argument = MainActivity.mActivity.getFilesDir().getAbsolutePath();
         String filesDirectory = argument;
-        String app_root_dir = PythonActivity.mActivity.getAppRoot();
-        String entry_point = PythonActivity.mActivity.getEntryPoint(app_root_dir + "/service");
+        String app_root_dir = MainActivity.mActivity.getAppRoot();
+        String entry_point = MainActivity.mActivity.getEntryPoint(app_root_dir + "/service");
         serviceIntent.putExtra("androidPrivate", argument);
         serviceIntent.putExtra("androidArgument", app_root_dir);
         serviceIntent.putExtra("serviceEntrypoint", "service/" + entry_point);
@@ -615,12 +615,12 @@ public class MainActivity extends AppCompatActivity {
         serviceIntent.putExtra("serviceTitle", serviceTitle);
         serviceIntent.putExtra("serviceDescription", serviceDescription);
         serviceIntent.putExtra("pythonServiceArgument", pythonServiceArgument);
-        PythonActivity.mActivity.startService(serviceIntent);
+        MainActivity.mActivity.startService(serviceIntent);
     }
 
     public static void stop_service() {
-        Intent serviceIntent = new Intent(PythonActivity.mActivity, PythonService.class);
-        PythonActivity.mActivity.stopService(serviceIntent);
+        Intent serviceIntent = new Intent(MainActivity.mActivity, PythonService.class);
+        MainActivity.mActivity.stopService(serviceIntent);
     }
 
 
@@ -633,6 +633,6 @@ public class MainActivity extends AppCompatActivity {
 class PythonMain implements Runnable {
     @Override
     public void run() {
-        PythonActivity.nativeInit(new String[0]);
+        MainActivity.nativeInit(new String[0]);
     }
 }
