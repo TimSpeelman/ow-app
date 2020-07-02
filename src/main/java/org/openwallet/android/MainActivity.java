@@ -1,5 +1,5 @@
 
-package org.kivy.android;
+package org.openwallet.android;
 
 import java.net.Socket;
 import java.net.InetSocketAddress;
