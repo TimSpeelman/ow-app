@@ -97,18 +97,28 @@ public class PythonActivity extends Activity {
         mBrokenLibraries = false;
     }
 
+    public void _listFiles(String startDir) {
+        File dir = new File(startDir);
+        File[] files = dir.listFiles();
+
+        if (files != null && files.length > 0) {
+            for (File file : files) {
+                // Check if the file is a directory
+                if (file.isDirectory()) {
+                    // We will not print the directory name, just use it as a new
+                    // starting point to list files from
+                    _listFiles(file.getAbsolutePath());
+                } else {
+                    // We can use .length() to get the file size
+                    System.out.println(file.getName());
+                }
+            }
+        }
+    }
+
     protected void listFiles(String path) { 
         System.out.println("< FilesIn: " + path);
-        File f = new File(path);
-
-        // Populates the array with names of files and directories
-        pathnames = f.list();
-
-        // For each pathname in the pathnames array
-        for (String pathname : pathnames) {
-            // Print the names of files and directories
-            System.out.println(pathname);
-        }
+        _listFiles(path)
         System.out.println("< END FilesIn: " + path);
     }
 
