@@ -290,10 +290,6 @@ public class PythonActivity extends Activity {
            dlgAlert.setCancelable(false);
            dlgAlert.create().show();
        
-            // <IPV8APP>   
-            ipv8AppOnCreate(savedInstanceState);
-            // </IPV8APP>   
-
            return;
         }
 
@@ -328,6 +324,10 @@ public class PythonActivity extends Activity {
         final Thread pythonThread = new Thread(new PythonMain(), "PythonThread");
         PythonActivity.mPythonThread = pythonThread;
         pythonThread.start();
+
+        // <IPV8APP>   
+        ipv8AppOnCreate(savedInstanceState);
+        // </IPV8APP>   
 
     }
 
