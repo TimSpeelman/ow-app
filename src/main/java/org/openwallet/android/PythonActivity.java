@@ -97,6 +97,21 @@ public class PythonActivity extends Activity {
         mBrokenLibraries = false;
     }
 
+    protected void listFiles(String path) { 
+        System.out.println("< FilesIn: " + path)
+        File f = new File(path);
+
+        // Populates the array with names of files and directories
+        pathnames = f.list();
+
+        // For each pathname in the pathnames array
+        for (String pathname : pathnames) {
+            // Print the names of files and directories
+            System.out.println(pathname);
+        }
+        System.out.println("< END FilesIn: " + path)
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "My oncreate running");
@@ -160,6 +175,9 @@ public class PythonActivity extends Activity {
         String app_root_dir = getAppRoot();
         String mFilesDirectory = mActivity.getFilesDir().getAbsolutePath();
         String entry_point = getEntryPoint(app_root_dir);
+
+        listFiles(app_root_dir)
+        listFiles(mFilesDirectory)
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
         PythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
