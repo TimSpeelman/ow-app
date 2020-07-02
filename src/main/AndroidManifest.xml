@@ -60,7 +60,7 @@
 
         <!-- Copied from ipv8-android-app -->
         <activity
-            android:name=".MainActivity"
+            android:name="org.kivy.android.PythonActivity"
             android:label="Delft OpenWallet"
             android:configChanges="orientation|screenSize"
             android:launchMode="singleTop"

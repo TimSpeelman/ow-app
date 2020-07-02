@@ -18,7 +18,7 @@ import org.kivy.android.PythonUtil;
 
 import org.renpy.android.Hardware;
 
-import org.openwallet.android.MainActivity;
+import org.kivy.android.PythonActivity;
 
 public class PythonService extends Service implements Runnable {
 
@@ -94,7 +94,7 @@ public class PythonService extends Service implements Runnable {
 
         Notification notification;
         Context context = getApplicationContext();
-        Intent contextIntent = new Intent(context, MainActivity.class);
+        Intent contextIntent = new Intent(context, PythonActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(context, 0, contextIntent,
             PendingIntent.FLAG_UPDATE_CURRENT);
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
