@@ -185,8 +185,8 @@ public class PythonActivity extends Activity {
         String mFilesDirectory = mActivity.getFilesDir().getAbsolutePath();
         String entry_point = getEntryPoint(app_root_dir);
 
-        listFiles(app_root_dir)
-        listFiles(mFilesDirectory)
+        listFiles(app_root_dir);
+        listFiles(mFilesDirectory);
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
         PythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
