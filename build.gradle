@@ -40,10 +40,6 @@ android {
         versionCode code
         // Used for python files versioning
         versionName "build " + code
-        // Java 8 features
-        jackOptions {
-            enabled = true
-        }
 	}
 
 	
@@ -57,8 +53,8 @@ android {
 	}
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     sourceSets {
