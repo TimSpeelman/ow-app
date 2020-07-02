@@ -32,11 +32,11 @@ apply plugin: 'com.android.application'
 
 android {
 	compileSdkVersion 27
-	buildToolsVersion '26.0.2'
+	buildToolsVersion '27.0.3'
 	defaultConfig {
-		minSdkVersion 21
-		targetSdkVersion 27
-		// Auto increment, see above
+        minSdkVersion 21
+        targetSdkVersion 27
+        // Auto increment, see above
         versionCode code
         // Used for python files versioning
         versionName "build " + code
