@@ -16,7 +16,7 @@ public class ServiceOpenwallet extends PythonService {
 
     
 
-    public static void start(Context ctx, String pythonServiceArgument) {
+    public static void start(Context ctx/*, String pythonServiceArgument*/) {
         String argument = ctx.getFilesDir().getAbsolutePath() + "/app";
         Intent intent = new Intent(ctx, ServiceOpenwallet.class);
         intent.putExtra("androidPrivate", argument);
@@ -28,7 +28,7 @@ public class ServiceOpenwallet extends PythonService {
         intent.putExtra("pythonHome", argument);
         intent.putExtra("androidUnpack", argument);
         intent.putExtra("pythonPath", argument + ":" + argument + "/lib");
-        intent.putExtra("pythonServiceArgument", pythonServiceArgument);
+        intent.putExtra("pythonServiceArgument", "");
         ctx.startService(intent);
     }
 

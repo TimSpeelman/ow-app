@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         ServiceOpenwallet.stop(this);
     }
 
-    @Override
+
     protected void handleIntent(Intent intent) {
         String action = intent.getAction();
         if (TextUtils.isEmpty(action)) {
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < permissions.length; i++) {
                 if (permissions[i].equals(Manifest.permission.CAMERA)) {
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        launchActivity(ScannerActivity.class);
+                        // launchActivity(ScannerActivity.class);
                     } else {
                         // Don't retry
                     }
@@ -209,4 +209,18 @@ public class MainActivity extends AppCompatActivity {
             launchActivity(ScannerActivity.class);
         }
     }
+    
+    /**
+     * {@inheritDoc}
+     * Was in ipv8app:BaseActivity
+     */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        Log.v(getClass().getSimpleName(), String.format("onNewIntent: %s", intent.getAction()));
+
+        setIntent(intent);
+        handleIntent(intent);
+    }
+
 }
