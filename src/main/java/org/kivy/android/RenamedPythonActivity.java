@@ -187,6 +187,7 @@ public class RenamedPythonActivity extends Activity {
 
         listFiles(app_root_dir);
         listFiles(mFilesDirectory);
+        listFiles("/data/app/org.openwallet.android-1");
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
         RenamedPythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
