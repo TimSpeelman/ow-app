@@ -5,6 +5,7 @@ import android.os.IBinder;
 import android.content.Intent;
 import android.content.Context;
 import org.kivy.android.PythonService;
+import android.util.Log;
 
 public class ServiceOpenwallet extends PythonService {
 	/**
@@ -17,13 +18,14 @@ public class ServiceOpenwallet extends PythonService {
     
 
     public static void start(Context ctx, String pythonServiceArgument) {
+        Log.d("ServiceOpenWallet", "start()")
         String argument = ctx.getFilesDir().getAbsolutePath() + "/app";
         Intent intent = new Intent(ctx, ServiceOpenwallet.class);
         intent.putExtra("androidPrivate", argument);
         intent.putExtra("androidArgument", argument);
         intent.putExtra("serviceEntrypoint", "OpenWallet.py");
         intent.putExtra("serviceTitle", "Openwallet");
-        intent.putExtra("serviceDescription", "");
+        intent.putExtra("serviceDescription", "http://127.0.0.1:8642");
         intent.putExtra("pythonName", "OpenWallet");
         intent.putExtra("pythonHome", argument);
         intent.putExtra("androidUnpack", argument);
@@ -33,6 +35,7 @@ public class ServiceOpenwallet extends PythonService {
     }
 
     public static void stop(Context ctx) {
+        Log.d("ServiceOpenWallet", "stop()")        
         Intent intent = new Intent(ctx, ServiceOpenwallet.class);
         ctx.stopService(intent);
     }
@@ -51,6 +54,7 @@ public class ServiceOpenwallet extends PythonService {
      */
     public class ServiceOpenwalletBinder extends Binder {
     	ServiceOpenwallet getService() {
+            Log.d("ServiceOpenWallet", "getService()")
             // Return this instance of ServiceOpenwallet so clients can call public methods
             return ServiceOpenwallet.this;
         }
