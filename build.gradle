@@ -40,6 +40,10 @@ android {
         versionCode code
         // Used for python files versioning
         versionName "build " + code
+        // Java 8 features
+        jackOptions {
+            enabled = true
+        }
 	}
 
 	
