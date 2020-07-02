@@ -98,7 +98,7 @@ public class PythonActivity extends Activity {
     }
 
     protected void listFiles(String path) { 
-        System.out.println("< FilesIn: " + path)
+        System.out.println("< FilesIn: " + path);
         File f = new File(path);
 
         // Populates the array with names of files and directories
@@ -109,7 +109,7 @@ public class PythonActivity extends Activity {
             // Print the names of files and directories
             System.out.println(pathname);
         }
-        System.out.println("< END FilesIn: " + path)
+        System.out.println("< END FilesIn: " + path);
     }
 
     @Override
@@ -176,8 +176,8 @@ public class PythonActivity extends Activity {
         String mFilesDirectory = mActivity.getFilesDir().getAbsolutePath();
         String entry_point = getEntryPoint(app_root_dir);
 
-        listFiles(app_root_dir)
-        listFiles(mFilesDirectory)
+        listFiles(app_root_dir);
+        listFiles(mFilesDirectory);
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
         PythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
