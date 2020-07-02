@@ -49,6 +49,7 @@ import android.webkit.WebViewClient;
 import android.webkit.WebView;
 
 import org.kivy.android.PythonUtil;
+import org.kivy.android.PythonService;
 
 import org.renpy.android.ResourceManager;
 import org.renpy.android.AssetExtract;
