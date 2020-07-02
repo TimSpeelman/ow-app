@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity {
         @android.webkit.JavascriptInterface
         public void launchScanner()
         {
-            launchActivity(ScannerActivity.class);
+            // launchActivity(ScannerActivity.class);
         }
     }
     
