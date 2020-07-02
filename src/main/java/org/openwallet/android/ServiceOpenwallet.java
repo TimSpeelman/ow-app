@@ -61,7 +61,7 @@ public class ServiceOpenwallet extends PythonService {
 
     // copied
     public static IRestApi createService() {
-        return IPV8Service.createService("http://127.0.0.1:8642", "");
+        return ServiceOpenwallet.createService("http://127.0.0.1:8642", "");
     }
 
 
