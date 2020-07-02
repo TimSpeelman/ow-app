@@ -117,13 +117,13 @@ public class MainActivity extends AppCompatActivity {
         System.exit(0);
     }
 
-    protected void startService() {
-        ServiceOpenwallet.start(this); // Run normally
-    }
+    // protected void startService() {
+    //     ServiceOpenwallet.start(this); // Run normally
+    // }
     
-    protected void killService() {
-        ServiceOpenwallet.stop(this);
-    }
+    // protected void killService() {
+    //     ServiceOpenwallet.stop(this);
+    // }
 
     protected void handleIntent(Intent intent) {
         String action = intent.getAction();
@@ -151,7 +151,8 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
         } else {
-            startService();
+            Log.d("ipv8AppOnCreate", "not starting service"); // TODO Remove
+            // startService();
         }
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
@@ -202,7 +203,8 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < permissions.length; i++) {
                 if (permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        startService();
+                        Log.d("onRequestPermissionsResult", "not starting service"); // TODO Remove
+                        // startService();
                     } else {
                         requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
                     }
