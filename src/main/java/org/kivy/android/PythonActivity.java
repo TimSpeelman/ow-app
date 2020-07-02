@@ -147,7 +147,61 @@ public class PythonActivity extends Activity {
             mWebView.loadUrl(url);
         }
     }
+  
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        if (requestCode == WRITE_STORAGE_PERMISSION_REQUEST_CODE) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        startService();
+                    } else {
+                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
+                    }
+                }
+            }
+        }
+        else if (requestCode == ZBAR_CAMERA_PERMISSION) {
+            for (int i = 0; i < permissions.length; i++) {
+                if (permissions[i].equals(Manifest.permission.CAMERA)) {
+                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                        // launchActivity(ScannerActivity.class);
+                    } else {
+                        // Don't retry
+                    }
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        mWebView.saveState(outState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mWebView.restoreState(savedInstanceState);
+    }
+
+    public class JavaScriptInterface {
+        Context mContext;
+
+        JavaScriptInterface(Context c) {
+            mContext = c;
+        }
+
+        @android.webkit.JavascriptInterface
+        public void launchScanner()
+        {
+            // launchActivity(ScannerActivity.class);
+        }
+    }
+    
     // </IPV8APP>
 
 
