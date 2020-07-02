@@ -68,7 +68,7 @@ import java.lang.Runnable;
 import org.openwallet.android.ServiceOpenwallet;
 // </IPV8MAIN>
 
-public class MyActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     
     // <IPV8MAIN>
     private Class<?> mClss;
@@ -83,9 +83,9 @@ public class MyActivity extends Activity {
     // PythonActivity in the SDL2 bootstrap, but removing all the SDL2
     // specifics.
 
-    private static final String TAG = "PythonActivity";
+    private static final String TAG = "MainActivity";
 
-    public static PythonActivity mActivity = null;
+    public static MainActivity mActivity = null;
 
     /** If shared libraries (e.g. the native application) could not be loaded. */
     public static boolean mBrokenLibraries;
@@ -366,7 +366,7 @@ public class MyActivity extends Activity {
         pythonThread.start();
         
         // <IPV8MAIN>   
-        this.ipv8AppOnCreate(savedInstanceState)
+        this.ipv8AppOnCreate(savedInstanceState);
         // </IPV8MAIN>
     }
 
