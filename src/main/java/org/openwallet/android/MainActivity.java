@@ -106,7 +106,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void shutdown() {
-        killService();
+        Log.d("shutdown", "skip killService()"); // TODO
+        // killService();
 
         try {
             Thread.sleep(1000);
@@ -151,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
         } else {
-            Log.d("ipv8AppOnCreate", "not starting service"); // TODO Remove
+            Log.d("ipv8AppOnCreate", "skip startService()"); // TODO Remove
             // startService();
         }
 
@@ -203,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             for (int i = 0; i < permissions.length; i++) {
                 if (permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                     if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        Log.d("onRequestPermissionsResult", "not starting service"); // TODO Remove
+                        Log.d("onRequestPermissionsResult", "skip startService()"); // TODO Remove
                         // startService();
                     } else {
                         requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
