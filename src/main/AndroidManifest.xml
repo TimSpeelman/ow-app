@@ -49,6 +49,11 @@
                
         <meta-data android:name="wakelock" android:value="0"/>
 
+        <activity android:name="org.kivy.android.PythonActivity"
+-                  android:label="@string/app_name"
+-                  android:configChanges="keyboardHidden|orientation|screenSize"
+-                  >
+
         <!-- Copied from ipv8-android-app -->
         <activity
             android:name=".MainActivity"
