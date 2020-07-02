@@ -96,6 +96,31 @@ public class PythonActivity extends Activity {
         mBrokenLibraries = false;
     }
 
+    public void _listFiles(String startDir) {
+        File dir = new File(startDir);
+        File[] files = dir.listFiles();
+
+        if (files != null && files.length > 0) {
+            for (File file : files) {
+                // Check if the file is a directory
+                if (file.isDirectory()) {
+                    // We will not print the directory name, just use it as a new
+                    // starting point to list files from
+                    _listFiles(file.getAbsolutePath());
+                } else {
+                    // We can use .length() to get the file size
+                    System.out.println(file.getAbsolutePath());
+                }
+            }
+        }
+    }
+
+    protected void listFiles(String path) { 
+        System.out.println("< FilesIn: " + path);
+        _listFiles(path);
+        System.out.println("< END FilesIn: " + path);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.v(TAG, "My oncreate running");
@@ -159,6 +184,9 @@ public class PythonActivity extends Activity {
         String app_root_dir = getAppRoot();
         String mFilesDirectory = mActivity.getFilesDir().getAbsolutePath();
         String entry_point = getEntryPoint(app_root_dir);
+
+        listFiles(app_root_dir)
+        listFiles(mFilesDirectory)
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
         PythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
