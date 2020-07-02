@@ -51,14 +51,14 @@ import org.kivy.android.PythonUtil;
 import org.renpy.android.ResourceManager;
 import org.renpy.android.AssetExtract;
 
-public class PythonActivity extends Activity {
+public class RenamedPythonActivity extends Activity {
     // This activity is modified from a mixture of the SDLActivity and
-    // PythonActivity in the SDL2 bootstrap, but removing all the SDL2
+    // RenamedPythonActivity in the SDL2 bootstrap, but removing all the SDL2
     // specifics.
 
-    private static final String TAG = "PythonActivity";
+    private static final String TAG = "RenamedPythonActivity";
 
-    public static PythonActivity mActivity = null;
+    public static RenamedPythonActivity mActivity = null;
 
     /** If shared libraries (e.g. the native application) could not be loaded. */
     public static boolean mBrokenLibraries;
@@ -142,7 +142,7 @@ public class PythonActivity extends Activity {
         //Log.v(TAG, "Ready to unpack");
         //new UnpackFilesTask().execute(getAppRoot());
 
-        PythonActivity.initialize();
+        RenamedPythonActivity.initialize();
 
         // Load shared libraries
         String errorMsgBrokenLib = "";
@@ -171,7 +171,7 @@ public class PythonActivity extends Activity {
                     @Override
                     public void onClick(DialogInterface dialog,int id) {
                         // if this button is clicked, close current activity
-                        PythonActivity.mActivity.finish();
+                        RenamedPythonActivity.mActivity.finish();
                     }
                 });
            dlgAlert.setCancelable(false);
@@ -189,14 +189,14 @@ public class PythonActivity extends Activity {
         listFiles(mFilesDirectory);
 
         Log.v(TAG, "Setting env vars for start.c and Python to use");
-        PythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
-        PythonActivity.nativeSetenv("ANDROID_ARGUMENT", app_root_dir);
-        PythonActivity.nativeSetenv("ANDROID_APP_PATH", app_root_dir);
-        PythonActivity.nativeSetenv("ANDROID_PRIVATE", mFilesDirectory);
-        PythonActivity.nativeSetenv("ANDROID_UNPACK", app_root_dir);
-        PythonActivity.nativeSetenv("PYTHONHOME", app_root_dir);
-        PythonActivity.nativeSetenv("PYTHONPATH", app_root_dir + ":" + app_root_dir + "/lib");
-        PythonActivity.nativeSetenv("PYTHONOPTIMIZE", "2");
+        RenamedPythonActivity.nativeSetenv("ANDROID_ENTRYPOINT", entry_point);
+        RenamedPythonActivity.nativeSetenv("ANDROID_ARGUMENT", app_root_dir);
+        RenamedPythonActivity.nativeSetenv("ANDROID_APP_PATH", app_root_dir);
+        RenamedPythonActivity.nativeSetenv("ANDROID_PRIVATE", mFilesDirectory);
+        RenamedPythonActivity.nativeSetenv("ANDROID_UNPACK", app_root_dir);
+        RenamedPythonActivity.nativeSetenv("PYTHONHOME", app_root_dir);
+        RenamedPythonActivity.nativeSetenv("PYTHONPATH", app_root_dir + ":" + app_root_dir + "/lib");
+        RenamedPythonActivity.nativeSetenv("PYTHONOPTIMIZE", "2");
 
         try {
             Log.v(TAG, "Access to our meta-data...");
@@ -212,7 +212,7 @@ public class PythonActivity extends Activity {
         }
 
         final Thread pythonThread = new Thread(new PythonMain(), "PythonThread");
-        PythonActivity.mPythonThread = pythonThread;
+        RenamedPythonActivity.mPythonThread = pythonThread;
         pythonThread.start();
 
     }
@@ -410,11 +410,11 @@ public class PythonActivity extends Activity {
 
     public static void start_service(String serviceTitle, String serviceDescription,
                 String pythonServiceArgument) {
-        Intent serviceIntent = new Intent(PythonActivity.mActivity, PythonService.class);
-        String argument = PythonActivity.mActivity.getFilesDir().getAbsolutePath();
+        Intent serviceIntent = new Intent(RenamedPythonActivity.mActivity, PythonService.class);
+        String argument = RenamedPythonActivity.mActivity.getFilesDir().getAbsolutePath();
         String filesDirectory = argument;
-        String app_root_dir = PythonActivity.mActivity.getAppRoot();
-        String entry_point = PythonActivity.mActivity.getEntryPoint(app_root_dir + "/service");
+        String app_root_dir = RenamedPythonActivity.mActivity.getAppRoot();
+        String entry_point = RenamedPythonActivity.mActivity.getEntryPoint(app_root_dir + "/service");
         serviceIntent.putExtra("androidPrivate", argument);
         serviceIntent.putExtra("androidArgument", app_root_dir);
         serviceIntent.putExtra("serviceEntrypoint", "service/" + entry_point);
@@ -424,12 +424,12 @@ public class PythonActivity extends Activity {
         serviceIntent.putExtra("serviceTitle", serviceTitle);
         serviceIntent.putExtra("serviceDescription", serviceDescription);
         serviceIntent.putExtra("pythonServiceArgument", pythonServiceArgument);
-        PythonActivity.mActivity.startService(serviceIntent);
+        RenamedPythonActivity.mActivity.startService(serviceIntent);
     }
 
     public static void stop_service() {
-        Intent serviceIntent = new Intent(PythonActivity.mActivity, PythonService.class);
-        PythonActivity.mActivity.stopService(serviceIntent);
+        Intent serviceIntent = new Intent(RenamedPythonActivity.mActivity, PythonService.class);
+        RenamedPythonActivity.mActivity.stopService(serviceIntent);
     }
 
 
@@ -442,6 +442,6 @@ public class PythonActivity extends Activity {
 class PythonMain implements Runnable {
     @Override
     public void run() {
-        PythonActivity.nativeInit(new String[0]);
+        RenamedPythonActivity.nativeInit(new String[0]);
     }
 }

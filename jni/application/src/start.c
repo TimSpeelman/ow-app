@@ -454,7 +454,7 @@ JNIEXPORT void JNICALL Java_org_kivy_android_PythonService_nativeStart(
 #if defined(BOOTSTRAP_NAME_WEBVIEW) || defined(BOOTSTRAP_NAME_SERVICEONLY)
 // Webview and service_only uses some more functions:
 
-void Java_org_kivy_android_PythonActivity_nativeSetenv(
+void Java_org_kivy_android_RenamedPythonActivity_nativeSetenv(
                                     JNIEnv* env, jclass cls,
                                     jstring name, jstring value)
 //JNIEXPORT void JNICALL SDL_JAVA_INTERFACE(nativeSetenv)(
@@ -471,7 +471,7 @@ void Java_org_kivy_android_PythonActivity_nativeSetenv(
 }
 
 
-void Java_org_kivy_android_PythonActivity_nativeInit(JNIEnv* env, jclass cls, jobject obj)
+void Java_org_kivy_android_RenamedPythonActivity_nativeInit(JNIEnv* env, jclass cls, jobject obj)
 {
   /* This nativeInit follows SDL2 */
 
