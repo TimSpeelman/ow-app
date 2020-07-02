@@ -18,6 +18,8 @@ import org.kivy.android.PythonUtil;
 
 import org.renpy.android.Hardware;
 
+import org.openwallet.android.PythonActivity;
+
 
 public class PythonService extends Service implements Runnable {
 
