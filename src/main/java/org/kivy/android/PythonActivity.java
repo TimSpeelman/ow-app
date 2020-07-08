@@ -256,7 +256,7 @@ public class PythonActivity extends Activity {
 
         System.out.println("Included Assets:");
         try {
-            String[] myAssets =  this.getAssets().list(".");
+            String[] myAssets =  this.getAssets().list("");
             for (String a : myAssets) {
                 System.out.println(a);
             }
