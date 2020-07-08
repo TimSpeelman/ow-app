@@ -254,21 +254,17 @@ public class PythonActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        System.out.println("Included Assets:");
-        try {
-            String[] myAssets =  this.getAssets().list("");
-            for (String a : myAssets) {
-                System.out.println(a);
-            }
-        } catch (Exception e) {
-            Log.w("Exception", e);
-        }
+        File app_root_file = new File(getAppRoot());
+        File myassets = new File(app_root_file.getAbsolutePath() + "/myassets").mkdirs();
+
+        Log.v(TAG, "Copying assets to " + myassets.getAbsolutePath());
+        this.copyAssets("", myassets.getAbsolutePath());
 
         Log.v(TAG, "My oncreate running");
         resourceManager = new ResourceManager(this);
 
         Log.v(TAG, "Ready to unpack");
-        File app_root_file = new File(getAppRoot());
+        
         unpackData("private", app_root_file);
 
         listFiles(app_root_file.getAbsolutePath());
@@ -611,6 +607,51 @@ public class PythonActivity extends Activity {
         _listFiles(path);
         System.out.println("< END FilesIn: " + path);
     }    
+
+    private void copyAssets(String assetPath, String targetFolder) {
+        AssetManager assetManager = getAssets();
+        String[] files = null;
+        try {
+            files = assetManager.list(assetPath);
+        } catch (IOException e) {
+            Log.e("tag", "Failed to get asset file list.", e);
+        }
+        if (files != null) for (String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+            in = assetManager.open(filename);
+            File outFile = new File(targetFolder, filename);
+            out = new FileOutputStream(outFile);
+            copyFile(in, out);
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }     
+            finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        // NOOP
+                    }
+                }
+            }  
+        }
+    }
+    private void copyFile(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[1024];
+        int read;
+        while((read = in.read(buffer)) != -1){
+        out.write(buffer, 0, read);
+        }
+    }
 }
 
 
