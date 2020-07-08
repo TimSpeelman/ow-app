@@ -612,49 +612,51 @@ public class PythonActivity extends Activity {
         System.out.println("< END FilesIn: " + path);
     }    
 
-    private void copyAssets(String assetPath, String targetFolder) {
-        AssetManager assetManager = getAssets();
-        String[] files = null;
+    private void copyAssets(String path, String targetFolder) {
+        AssetManager assetManager = this.getAssets();
+        String assets[] = null;
         try {
-            files = assetManager.list(assetPath);
-        } catch (IOException e) {
-            Log.e("tag", "Failed to get asset file list.", e);
-        }
-        if (files != null) for (String filename : files) {
-            InputStream in = null;
-            OutputStream out = null;
-            try {
-            in = assetManager.open(filename);
-            File outFile = new File(targetFolder, filename);
-            out = new FileOutputStream(outFile);
-            copyFile(in, out);
-            } catch(IOException e) {
-                Log.e("tag", "Failed to copy asset file: " + filename, e);
-            }     
-            finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-                        // NOOP
-                    }
+            assets = assetManager.list(path);
+            if (assets.length == 0) {
+                copyFile(path, targetFolder);
+            } else {
+                String fullPath = targetFolder + "/" + path;
+                File dir = new File(fullPath);
+                if (!dir.exists())
+                    dir.mkdir();
+                for (int i = 0; i < assets.length; ++i) {
+                    copyAssets(path + "/" + assets[i]);
                 }
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-                        // NOOP
-                    }
-                }
-            }  
+            }
+        } catch (IOException ex) {
+            Log.e("tag", "I/O Exception", ex);
         }
     }
-    private void copyFile(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[1024];
-        int read;
-        while((read = in.read(buffer)) != -1){
-        out.write(buffer, 0, read);
+
+    private void copyFile(String filename, String targetFolder) {
+        AssetManager assetManager = this.getAssets();
+
+        InputStream in = null;
+        OutputStream out = null;
+        try {
+            in = assetManager.open(filename);
+            String newFileName = targetFolder + "/" + filename;
+            out = new FileOutputStream(newFileName);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1) {
+                out.write(buffer, 0, read);
+            }
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
+        } catch (Exception e) {
+            Log.e("tag", e.getMessage());
         }
+
     }
 }
 
