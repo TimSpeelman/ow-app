@@ -262,7 +262,7 @@ public class PythonActivity extends Activity {
         myassets.mkdirs();
 
         Log.v(TAG, "Copying assets to " + myassets.getAbsolutePath());
-        this.copyAssets("", myassets.getAbsolutePath());
+        this.copyAssets("gui", myassets.getAbsolutePath());
 
         Log.v(TAG, "My oncreate running");
         resourceManager = new ResourceManager(this);
