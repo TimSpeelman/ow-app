@@ -83,7 +83,7 @@ public class PythonActivity extends Activity {
     private JavaScriptInterface JSInterface;
     private static final int ZBAR_CAMERA_PERMISSION = 1;
     private static final int WRITE_STORAGE_PERMISSION_REQUEST_CODE = 110;
-    private static final String url = "http://localhost:8642/app?port=8642";
+    private static final String url = "http://localhost:8642/app/index.html?port=8642";
     // </IPV8MAIN>
 
     // This activity is modified from a mixture of the SDLActivity and
