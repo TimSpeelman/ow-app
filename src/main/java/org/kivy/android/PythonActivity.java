@@ -255,7 +255,7 @@ public class PythonActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         System.out.println("Included Assets:");
-        String[] myAssets =  this.getAssets().list();
+        String[] myAssets =  this.getAssets().list(".");
         for (String a : myAssets) {
             System.out.println(a);
         }
