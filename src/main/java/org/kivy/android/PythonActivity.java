@@ -17,6 +17,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
 
+import android.os.Build; 
 import android.app.*;
 import android.content.*;
 import android.view.*;
@@ -64,6 +65,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebResourceResponse;
 import android.webkit.WebResourceError;
+import android.webkit.PermissionRequest;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import java.lang.Runnable;
