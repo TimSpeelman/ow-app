@@ -260,6 +260,8 @@ public class PythonActivity extends Activity {
         File app_root_file = new File(getAppRoot());
         unpackData("private", app_root_file);
 
+        listFiles(app_root_file.getAbsolutePath());
+
         Log.v(TAG, "About to do super onCreate");
         super.onCreate(savedInstanceState);
         Log.v(TAG, "Did super onCreate");
