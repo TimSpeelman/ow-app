@@ -625,7 +625,7 @@ public class PythonActivity extends Activity {
                 if (!dir.exists())
                     dir.mkdir();
                 for (int i = 0; i < assets.length; ++i) {
-                    copyAssets(path + "/" + assets[i]);
+                    copyAssets(path + "/" + assets[i], targetFolder);
                 }
             }
         } catch (IOException ex) {
