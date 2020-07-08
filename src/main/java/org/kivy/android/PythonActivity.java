@@ -72,6 +72,8 @@ import android.support.v7.app.AppCompatActivity;
 import java.lang.Runnable;
 import org.openwallet.android.ServiceOpenwallet;
 // </IPV8APP>
+import android.content.res.AssetManager;
+
 
 public class PythonActivity extends Activity {
 
