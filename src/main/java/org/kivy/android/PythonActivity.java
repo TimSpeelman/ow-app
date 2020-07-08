@@ -255,9 +255,13 @@ public class PythonActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         System.out.println("Included Assets:");
-        String[] myAssets =  this.getAssets().list(".");
-        for (String a : myAssets) {
-            System.out.println(a);
+        try {
+            String[] myAssets =  this.getAssets().list(".");
+            for (String a : myAssets) {
+                System.out.println(a);
+            }
+        } catch (Exception e) {
+            Log.w("Exception", e);
         }
 
         Log.v(TAG, "My oncreate running");
