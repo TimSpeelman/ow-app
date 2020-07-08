@@ -44,6 +44,7 @@ import android.graphics.Color;
 import android.widget.AbsoluteLayout;
 
 import android.webkit.WebViewClient;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 
 import org.kivy.android.PythonUtil;
@@ -111,13 +112,16 @@ public class PythonActivity extends Activity {
         }
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
+
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
         // Set JavascriptInterface
         JSInterface = new JavaScriptInterface(this);
         mWebView.addJavascriptInterface(JSInterface, "android");
         mWebView.setWebContentsDebuggingEnabled(true);
+
         // Load the GUI
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
@@ -147,6 +151,17 @@ public class PythonActivity extends Activity {
         if (savedInstanceState == null) {
             mWebView.loadUrl(url);
         }
+
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onPermissionRequest(PermissionRequest request) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    request.grant(request.getResources());
+                }
+            }
+        });
+
+
     }
   
     @Override
