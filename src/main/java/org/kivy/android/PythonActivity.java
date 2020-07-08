@@ -258,7 +258,7 @@ public class PythonActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
 
         File app_root_file = new File(getAppRoot());
-        File myassets = new File(this.getFilesDir().getAbsolutePath() + "/gui");
+        File myassets = new File(this.getFilesDir().getAbsolutePath());
         myassets.mkdirs();
 
         Log.v(TAG, "Copying assets to " + myassets.getAbsolutePath());
