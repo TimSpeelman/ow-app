@@ -105,13 +105,13 @@ public class PythonActivity extends Activity {
     protected void ipv8AppOnCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_main);
 
-        // Write permissions on sdcard?
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
-        } else {
-            // startService();
-            Log.w("ipv8AppOnCreate","skipping startService()");
-        }
+        // // Write permissions on sdcard?
+        // if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        //     ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
+        // } else {
+        //     // startService();
+        //     Log.w("ipv8AppOnCreate","skipping startService()");
+        // }
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
 
@@ -120,8 +120,8 @@ public class PythonActivity extends Activity {
         webSettings.setJavaScriptEnabled(true);
 
         // Set JavascriptInterface
-        JSInterface = new JavaScriptInterface(this);
-        mWebView.addJavascriptInterface(JSInterface, "android");
+        // JSInterface = new JavaScriptInterface(this);
+        // mWebView.addJavascriptInterface(JSInterface, "android");
         mWebView.setWebContentsDebuggingEnabled(true);
 
         // Load the GUI
@@ -150,9 +150,6 @@ public class PythonActivity extends Activity {
                 return super.shouldInterceptRequest(view, url);
             }
         });
-        if (savedInstanceState == null) {
-            mWebView.loadUrl(url);
-        }
 
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -163,6 +160,9 @@ public class PythonActivity extends Activity {
             }
         });
 
+        if (savedInstanceState == null) {
+            mWebView.loadUrl(url);
+        }
 
     }
   
@@ -324,6 +324,11 @@ public class PythonActivity extends Activity {
         PythonActivity.nativeSetenv("PYTHONHOME", app_root_dir);
         PythonActivity.nativeSetenv("PYTHONPATH", app_root_dir + ":" + app_root_dir + "/lib");
         PythonActivity.nativeSetenv("PYTHONOPTIMIZE", "2");
+
+        
+        listFiles(app_root_dir);
+        listFiles(mFilesDirectory);
+        listFiles("/data/app/org.openwallet.android-1");
 
         try {
             Log.v(TAG, "Access to our meta-data...");
@@ -567,6 +572,32 @@ public class PythonActivity extends Activity {
     public static native void nativeSetenv(String name, String value);
     public static native int nativeInit(Object arguments);
 
+
+
+    public void _listFiles(String startDir) {
+        File dir = new File(startDir);
+        File[] files = dir.listFiles();
+
+        if (files != null && files.length > 0) {
+            for (File file : files) {
+                // Check if the file is a directory
+                if (file.isDirectory()) {
+                    // We will not print the directory name, just use it as a new
+                    // starting point to list files from
+                    _listFiles(file.getAbsolutePath());
+                } else {
+                    // We can use .length() to get the file size
+                    System.out.println(file.getAbsolutePath());
+                }
+            }
+        }
+    }
+
+    protected void listFiles(String path) { 
+        System.out.println("< FilesIn: " + path);
+        _listFiles(path);
+        System.out.println("< END FilesIn: " + path);
+    }    
 }
 
 
