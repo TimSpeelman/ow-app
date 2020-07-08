@@ -253,6 +253,13 @@ public class PythonActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        System.out.println("Included Assets:");
+        String[] myAssets =  this.getAssets().list();
+        for (String a : myAssets) {
+            System.out.println(a);
+        }
+
         Log.v(TAG, "My oncreate running");
         resourceManager = new ResourceManager(this);
 
