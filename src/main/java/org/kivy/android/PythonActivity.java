@@ -81,7 +81,7 @@ public class PythonActivity extends Activity {
     private Class<?> mClss;
     private WebView mWebView;
     private JavaScriptInterface JSInterface;
-    private static final int ZBAR_CAMERA_PERMISSION = 1;
+    private static final int MY_CAMERA_REQUEST_CODE = 1;
     private static final int WRITE_STORAGE_PERMISSION_REQUEST_CODE = 110;
     private static final String url = "http://localhost:8642/app/index.html?port=8642";
     // </IPV8MAIN>
@@ -115,6 +115,10 @@ public class PythonActivity extends Activity {
         //     // startService();
         //     Log.w("ipv8AppOnCreate","skipping startService()");
         // }
+
+        if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_CAMERA_REQUEST_CODE);
+        }
 
         mWebView = (WebView) findViewById(R.id.activity_main_webview);
 
@@ -168,32 +172,15 @@ public class PythonActivity extends Activity {
         }
 
     }
-  
+    
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == WRITE_STORAGE_PERMISSION_REQUEST_CODE) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (permissions[i].equals(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        Log.w("onRequestPermissionsResult", "skipping startService()");
-                        // startService();
-                    } else {
-                        requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, WRITE_STORAGE_PERMISSION_REQUEST_CODE);
-                    }
-                }
-            }
-        }
-        else if (requestCode == ZBAR_CAMERA_PERMISSION) {
-            for (int i = 0; i < permissions.length; i++) {
-                if (permissions[i].equals(Manifest.permission.CAMERA)) {
-                    if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                        // launchActivity(ScannerActivity.class);
-                    } else {
-                        // Don't retry
-                    }
-                }
+        if (requestCode == MY_CAMERA_REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
             }
         }
     }
